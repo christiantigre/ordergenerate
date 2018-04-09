@@ -1,0 +1,98 @@
+{
+    "fields": [
+        {
+            "name": "fecha_orden",
+            "type": "string"
+        },
+        {
+            "name": "Empresa",
+            "type": "string"
+        },
+        {
+            "name": "cedula",
+            "type": "number"
+        },
+        {
+            "name": "ruc",
+            "type": "number"
+        },
+        {
+            "name": "email",
+            "type": "email"
+        },        
+        {
+            "name": "telefono",
+            "type": "number"
+        },        
+        {
+            "name": "cel_movi",
+            "type": "number"
+        },        
+        {
+            "name": "cel_claro",
+            "type": "number"
+        },
+        {
+            "name": "wts",
+            "type": "number"
+        },
+        {
+            "name": "direccion",
+            "type": "string"
+        },
+        {
+            "name": "fecha_posisionamiento",
+            "type": "date"
+        },
+        {
+            "name": "activo",
+            "type": "select",
+            "options": {
+                "1": "Activo",
+                "0": "Inactivo"
+            }
+        },
+        {
+            "name": "imagen",
+            "type": "file"
+        }
+    ],
+    "validations": [
+        {
+            "field": "empresa",
+            "rules": "nullable|max:75"
+        },
+        {
+            "field": "cedula",
+            "rules": "nullable"
+        },
+        {
+            "field": "ruc",
+            "rules": "nullable"
+        },
+        {
+            "field": "email",
+            "rules": "nullable"
+        },
+        {
+            "field": "telefono",
+            "rules": "nullable"
+        },        
+        {
+            "field": "cel_movi",
+            "rules": "nullable"
+        },
+        {
+            "field": "cel_claro",
+            "rules": "nullable"
+        },
+        {
+            "field": "wts",
+            "rules": "nullable"
+        },
+        {
+            "field": "direccion",
+            "rules": "nullable|max:191"
+        }
+    ]
+}
