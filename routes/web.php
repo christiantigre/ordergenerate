@@ -35,6 +35,10 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+  Route::resource('/orden', 'Admin\\OrdenController');
+  Route::resource('/empresa', 'Admin\\EmpresaController');
+  Route::get('/administracion', 'Admin\\AdminController@index')->name('administracion');
+  Route::get('/formatoorden', 'Admin\\OrdenController@formatoorden')->name('formatoorden');
+  Route::resource('/clausula', 'Admin\\ClausulaController');
 });
 
-Route::resource('admin/orden', 'Admin\\OrdenController');

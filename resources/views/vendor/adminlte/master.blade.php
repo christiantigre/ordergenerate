@@ -37,6 +37,21 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <!--FLash laravel-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+    <!-- Jquery edit for Datepicker-->
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- Datepicker Files -->
+    <link rel="stylesheet" href="{{asset('plugins/bootstrap-datepicker-1.6.4/css/bootstrap-datepicker3.min.css')}}">
+    <link rel="stylesheet" href="{{asset('plugins/bootstrap-datepicker-1.6.4/css/bootstrap-datepicker.standalone.min.css')}}">
+    <script src="{{asset('plugins/bootstrap-datepicker-1.6.4/js/bootstrap-datepicker.min.js')}}"></script>
+    <!-- Datepicker Languaje -->
+    <script src="{{asset('plugins/bootstrap-datepicker-1.6.4/locales/bootstrap-datepicker.es.min.js')}}"></script>
+
+    
 </head>
 <body class="hold-transition @yield('body_class')">
 

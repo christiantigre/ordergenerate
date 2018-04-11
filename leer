@@ -1,0 +1,1 @@
+php artisan crud:generate Clausula --fields_from_file="C:/Users/Andres/Dropbox/Dropbox/ordergenerate/public/fields/fieldclausula.json" --view-path=admin --controller-namespace=Admin --route-group=admin

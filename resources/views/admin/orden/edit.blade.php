@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">Edit Orden #{{ $orden->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/orden') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/orden') }}" title="Atras"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atras</button></a>
                         <br />
                         <br />
 

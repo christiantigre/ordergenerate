@@ -6,10 +6,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Orden;
+use App\Empresa;
 use Illuminate\Http\Request;
 
 class OrdenController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin', ['except' => 'logout']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -39,6 +44,9 @@ class OrdenController extends Controller
             $orden = Orden::latest()->paginate($perPage);
         }
 
+
+        
+
         return view('admin.orden.index', compact('orden'));
     }
 
@@ -50,6 +58,28 @@ class OrdenController extends Controller
     public function create()
     {
         return view('admin.orden.create');
+    }
+
+    public function formatoorden(){
+        $orden = "";
+        $empresa = Empresa::first()->get();
+        $hoy = "";
+        $empresa = "";
+        $tot_abonos = "";
+        $pre_final = "";
+        $clausulas = "";
+
+        $pdf     = \PDF::loadView('pdf.pdf', ['orden' => $orden, 'empresa' => $empresa, 'hoy' => $hoy]);
+         $pdf     = \PDF::loadView('pdf.pdf', [
+            'orden'      => $orden,
+            'empresa'    => $empresa,
+            'hoy'        => $hoy,
+            'tot_abonos' => $tot_abonos,
+            'pre_final'  => $pre_final,
+            'clausulas'  => $clausulas]);
+
+        //return $pdf->download('orden-#.pdf');
+        return $pdf->stream();
     }
 
     /**
@@ -175,4 +205,11 @@ class OrdenController extends Controller
 
         return redirect('admin/orden')->with('flash_message', 'Orden deleted!');
     }
+
+    protected function guard()
+    {
+        return Auth::guard('admin');
+    }
+
+    
 }
