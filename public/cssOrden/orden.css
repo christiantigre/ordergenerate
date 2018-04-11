@@ -28,7 +28,7 @@ strong{ font-size: 75%; }
 	height: auto;
 	float: left;
 }
-.tabla1 tr td.td-logo{width: 80%;}
+.tabla1 tr td.td-logo{width: 70%;}
 .tabla1 tr td.td-secuencial{width: 20%;
 }
 .tabla1 tr td.td-description{width: 100%;}
@@ -38,7 +38,7 @@ label.slog_logan{bottom: 1em;}
 	border: 1px solid #050505; padding: 10px;
 	margin: 6; 
 	padding: 6;
-	width: 30%;
+	width: 20%;
 	height: auto;
 	float: right;
 }
@@ -117,3 +117,6 @@ label.slog_logan{bottom: 1em;}
 	.firma{
 		/*text-decoration: overline;*/
 	}
+	hr {
+page-break-after: always;
+}

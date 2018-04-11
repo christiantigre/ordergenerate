@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Orden;
 use App\Empresa;
+use App\Clausula;
 use Illuminate\Http\Request;
 
 class OrdenController extends Controller
@@ -41,7 +42,7 @@ class OrdenController extends Controller
                 ->orWhere('imagen', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $orden = Orden::latest()->paginate($perPage);
+            $orden = Orden::OrderBy('id','ASC')->latest()->paginate($perPage);
         }
 
 
@@ -57,29 +58,47 @@ class OrdenController extends Controller
      */
     public function create()
     {
+
         return view('admin.orden.create');
     }
 
+
     public function formatoorden(){
-        $orden = "";
-        $empresa = Empresa::first()->get();
-        $hoy = "";
-        $empresa = "";
-        $tot_abonos = "";
-        $pre_final = "";
-        $clausulas = "";
+        $contador = Orden::count();
+        $orden = Orden::get();
+        $empresa = Empresa::first();
+        $clausulas = Clausula::Where('activo','1')->get();
 
-        $pdf     = \PDF::loadView('pdf.pdf', ['orden' => $orden, 'empresa' => $empresa, 'hoy' => $hoy]);
-         $pdf     = \PDF::loadView('pdf.pdf', [
-            'orden'      => $orden,
-            'empresa'    => $empresa,
-            'hoy'        => $hoy,
-            'tot_abonos' => $tot_abonos,
-            'pre_final'  => $pre_final,
+        $nombre = $empresa->almacen .' - '. $empresa->slogan;
+        $direccion = $empresa->dirMatriz;
+        $correo = $empresa->email;
+        $contacto = $empresa->telefono .' - '.$empresa->cel_movi.' / '.$empresa->cel_claro;
+
+        $pdf     = \PDF::loadView('pdf.pdf', [
+            'orden' => $orden, 
+            'slogan' => $nombre, 
+            'empresa' => $empresa,
+            'direccion' => $direccion,
+            'correo' => $correo,
+            'contacto' => $contacto,
             'clausulas'  => $clausulas]);
+        //$pdf->setPaper('A4');
 
-        //return $pdf->download('orden-#.pdf');
         return $pdf->stream();
+/*
+        return $pdf->download($numero_orden.'.pdf');
+*/
+
+    }
+
+
+    public static function generate_numbers($start, $count, $digits)
+    {
+        $result = array();
+        for ($n = $start; $n < $start + $count; $n++) {
+            $result[] = str_pad($n, $digits, "0", STR_PAD_LEFT);
+        }
+        return $result;
     }
 
     /**
@@ -92,32 +111,25 @@ class OrdenController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'empresa' => 'nullable|max:75',
-			'cedula' => 'nullable',
-			'ruc' => 'nullable',
-			'email' => 'nullable',
-			'telefono' => 'nullable',
-			'cel_movi' => 'nullable',
-			'cel_claro' => 'nullable',
-			'wts' => 'nullable',
-			'direccion' => 'nullable|max:191'
+			'secuencial_inicio' => 'required',
+			'cantidad' => 'required',
 		]);
         $requestData = $request->all();
-        
+        $inicio = $requestData['secuencial_inicio'];
+        $cantidad = $requestData['cantidad'];
+        $requestData['empresa_id'] = 1;
 
-        if ($request->hasFile('imagen')) {
-            foreach($request['imagen'] as $file){
-                $uploadPath = public_path('/uploads/imagen');
-
-                $extension = $file->getClientOriginalExtension();
-                $fileName = rand(11111, 99999) . '.' . $extension;
-
-                $file->move($uploadPath, $fileName);
-                $requestData['imagen'] = $fileName;
-            }
+        $i = 1;
+        while ( $i<= $cantidad) { 
+            $inicio_incrementa = $inicio;
+            $numbers     = $this->generate_numbers($inicio, 1, 6);
+            $numero_orden = implode("", $numbers); 
+            $requestData['cantidad'] = $numero_orden;
+            Orden::create(['secuencial'=>$numero_orden,'empresa_id'=>'1']);
+            $i++;
+            $inicio++;
         }
 
-        Orden::create($requestData);
 
         return redirect('admin/orden')->with('flash_message', 'Orden added!');
     }

@@ -25,7 +25,7 @@ class Orden extends Model
      *
      * @var array
      */
-    protected $fillable = ['fecha_orden', 'empresa', 'cedula', 'ruc', 'email', 'telefono', 'cel_movi', 'cel_claro', 'wts', 'direccion', 'fecha_posisionamiento', 'activo', 'imagen','clausula'];
+    protected $fillable = ['secuencial', 'empresa_id'];
 
     
 }

@@ -7,7 +7,10 @@
                     <div class="panel-heading">orden</div>
                     <div class="panel-body">
                         <a href="{{ url('/admin/orden/create') }}" class="btn btn-success btn-sm" title="Add New orden">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                            <i class="fa fa-plus" aria-hidden="true"></i> Nuevo
+                        </a>
+                        <a href="{{ url('/admin/formatoorden') }}" class="btn btn-success btn-sm" title="Add New orden">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Generar
                         </a>
 
                         <form method="GET" action="{{ url('/admin/orden') }}" accept-charset="UTF-8" class="navbar-form navbar-right" role="search">
@@ -27,14 +30,14 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>orden</th><th>Propietario</th><th>Gerente</th><th>Actions</th>
+                                        <th>#</th><th>orden</th><th>empresa_id</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($orden as $item)
                                     <tr>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->orden }}</td><td>{{ $item->empresa }}</td><td>{{ $item->cedula }}</td>
+                                        <td>{{ $item->secuencial }}</td><td>{{ $item->empresa_id }}</td>
                                         <td>
                                             <a href="{{ url('/admin/orden/' . $item->id) }}" title="View orden"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/orden/' . $item->id . '/edit') }}" title="Edit orden"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

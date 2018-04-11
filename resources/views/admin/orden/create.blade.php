@@ -1,14 +1,12 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('content')
-    <div class="container">
         <div class="row">
-            @include('admin.sidebar')
 
-            <div class="col-md-9">
-                <div class="card">
-                    <div class="card-header">Create New Orden</div>
-                    <div class="card-body">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Crear Ordenes</div>
+                    <div class="panel-body">
                         <a href="{{ url('/admin/orden') }}" title="Atras"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atras</button></a>
                         <br />
                         <br />

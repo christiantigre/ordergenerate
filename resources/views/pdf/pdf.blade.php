@@ -12,7 +12,7 @@
 </head>
 
 <body>
-
+@foreach($orden as $ord)
 	<table class="tabla1">
 		<tr>
 			<td class="td-logo">
@@ -21,17 +21,16 @@
 						<span class="right_span">
 							<img src="uploads/empresa/logo.png" height="30" width="130" alt="logo"/>
 							<br>
-						<label class="header_label slog_logan">slogan</label>
+						<label class="header_label slog_logan">{{ $slogan }}</label>
 						<br>
-						<label class="header_label">direccion</label>
-						<label class="header_label">correo</label>
-						<label class="header_label">contactos
-							<label class="header_label">telefono</label> 
+						<label class="header_label">{{ $direccion }}</label>
+						<label class="header_label">{{ $correo }}</label>
+						<label class="header_label">{{ $contacto }}</label> 
 						</span>
 					</p>
 				</caption>
 			</td>
-			<td class="td-secuencial"><center><strong>N # 000001</strong></center></td>
+			<td class="td-secuencial"><center><strong>N # PcS-{{ $ord->secuencial }}</strong></center></td>
 		</tr>
 		<tr class="sin_borde">
 			<td class="td-description sin_borde" COLSPAN=2 >
@@ -129,24 +128,33 @@
 					<label for="check1" class="header_label"><input type="checkbox" name="option" id="check1" class="checkbox" />Cargador</label>
 					<label for="check1" class="header_label"><input type="checkbox" name="option" id="check1" class="checkbox" />Otro ____________________</label>
 					<br>
+					<br>
 				</td>
 			</tr>
 			<tr class="sin_borde" >
 				<td colspan="2" class="sin_borde">
 					<strong>Cliente :</strong><label class="header_label">________________________</label>
 					<strong>Responsable :</strong><label class="header_label">________________________</label>
+					<br>
+					<br>
+
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<strong>*Cláusulas.-</strong><label class="header_label">datos</label>
+					<strong>*Cláusulas.-</strong>
+						<label class="header_label">*
+					@foreach($clausulas as $clau)
+							{{ $clau->clausula }}
+					@endforeach
+						</label>
 				</td>
 			</tr>
 		</table>
 		<table class="tabla2">
 			<tr>
 				<td COLSPAN=2>
-					<strong>Orden # </strong><label class="header_label">000001</label>
+					<strong>Orden # </strong><label class="header_label">PcS-{{ $ord->secuencial }}</label>
 				</td>
 			</tr>
 			<tr class="">
@@ -184,6 +192,14 @@
 					<label class="header_label">_____________________________________</label><br>
 					<br>
 			</tr>
+			<tr>
+				<td colspan="2">
+					<strong>Observaciónes :</strong>
+					<label class="header_label">_____________________________________</label><br>
+					<label class="header_label">_____________________________________</label><br>
+					<label class="header_label">_____________________________________</label><br>
+					<br>
+			</tr>
 			<tr >
 				<td colspan="2" >
 					<strong>Equipo :</strong>
@@ -198,7 +214,8 @@
 				</td>
 			</tr>
 		</table>
-
+		<hr>
+@endforeach
 	</body>
 
 	</html>
